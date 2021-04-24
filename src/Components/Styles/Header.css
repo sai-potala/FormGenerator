@@ -1,0 +1,26 @@
+.Header_section {
+  width: 100vw;
+  height: 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+          
+}
+
+.Header_section .current {
+  color: #FFD700;
+  cursor: pointer;
+}
+
+.Header_section .nocurrent {
+  color: white;
+  cursor: pointer;
+}
+
+
+/*# sourceMappingURL=Header.css.map */

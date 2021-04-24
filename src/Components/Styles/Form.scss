@@ -1,0 +1,17 @@
+.create_form {
+  // align-content: center;
+  // overflow-y: scroll;
+
+  .form_section {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    overflow-y: scroll;
+
+    .seperate {
+      height: 80vh;
+    }
+  }
+}

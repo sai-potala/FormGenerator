@@ -1,0 +1,48 @@
+.main_section {
+  display: flex;
+}
+
+.profile_display {
+  height: 80vh;
+  width: 50vw;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .profile_paper {
+    width: 400px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .profile_headers {
+      color: lightcoral;
+    }
+
+    .image {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}
+
+.update_section {
+  height: 80vh;
+  width: 50vw;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .update_paper {
+    width: 400px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

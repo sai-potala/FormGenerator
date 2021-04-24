@@ -1,0 +1,29 @@
+.main_section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+
+
+
+.userform-h2{
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.fontawesome{
+    font-size: small;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+.paper-container-item{
+    margin-bottom: 20px;
+}

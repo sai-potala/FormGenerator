@@ -1,0 +1,27 @@
+.Login_section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .Login_paper {
+    width: 350px;
+    height: 400px;
+
+    .Login_form {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+
+    .Login_form > .Textfield {
+      width: 250px;
+    }
+
+    .Login_form > Button {
+      width: 150px;
+    }
+  }
+}
