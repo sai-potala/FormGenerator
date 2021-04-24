@@ -35,7 +35,7 @@ class Login extends React.Component {
       });
     } else {
       axios
-        .post("http://localhost:8900/auth/login", {
+        .post("https://api-form-generator.herokuapp.com/auth/login", {
           email: this.state.email,
           password: this.state.password,
         })
@@ -51,11 +51,15 @@ class Login extends React.Component {
               alert: "ENTER VALID PASSWORD",
             });
           } else if (response.data.message === "token") {
-            const {_id,name} = response.data.userinfo
+            const { _id, name } = response.data.userinfo;
             Cookies.set("token", response.data.token);
-            Cookies.set("userinfo",_id)
-            Cookies.set("name",name)
-            console.log("this is userinfo", Cookies.get("userinfo"),Cookies.get("name"));
+            Cookies.set("userinfo", _id);
+            Cookies.set("name", name);
+            console.log(
+              "this is userinfo",
+              Cookies.get("userinfo"),
+              Cookies.get("name")
+            );
             // console.log(this.props);
             this.props.history.push("/homepage");
           }
@@ -92,7 +96,7 @@ class Login extends React.Component {
       });
     } else if (this.state.password === this.state.repeat_password) {
       axios
-        .post("http://localhost:8900/auth/signup", {
+        .post("https://api-form-generator.herokuapp.com/auth/signup", {
           email: this.state.email,
           password: this.state.password,
         })

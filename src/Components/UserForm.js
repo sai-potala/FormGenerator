@@ -27,13 +27,19 @@ function UserForm() {
     setLoading(true)
     const value = e.currentTarget.value
     axios
-      .delete(`http://localhost:8900/auth/formdelete/${value}`)
+      .delete(
+        `https://api-form-generator.herokuapp.com/auth/formdelete/${value}`
+      )
       .then((response) => {
         console.log("this is response", response.data);
       })
       .catch((error) => console.log(error));
       axios
-        .get(`http://localhost:8900/auth/form/${Cookies.get("userinfo")}`)
+        .get(
+          `https://api-form-generator.herokuapp.com/auth/form/${Cookies.get(
+            "userinfo"
+          )}`
+        )
         .then((response) => {
           setLoading(false);
           setData(response.data);
@@ -106,7 +112,11 @@ function UserForm() {
   useEffect(() => {
     console.log("came to useeffect userform")
     axios
-      .get(`http://localhost:8900/auth/form/${Cookies.get("userinfo")}`)
+      .get(
+        `https://api-form-generator.herokuapp.com/auth/form/${Cookies.get(
+          "userinfo"
+        )}`
+      )
       .then((response) => {
         setLoading(false);
         setData(response.data);

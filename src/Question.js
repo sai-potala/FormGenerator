@@ -11,7 +11,9 @@ class Question extends React.Component {
 
   componentDidMount = () => {
     axios
-      .get(`http://localhost:8900/auth/form/${this.props.match.params.id}`)
+      .get(
+        `https://api-form-generator.herokuapp.com/auth/form/${this.props.match.params.id}`
+      )
       .then((response) => this.setState({ ...this.state, data: response.data }))
       .catch((error) => console.log(error));
   };

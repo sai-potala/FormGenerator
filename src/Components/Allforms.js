@@ -59,7 +59,7 @@ function UserForm() {
   useEffect(() => {
     console.log("came to useeffect userform");
     axios
-      .get("http://localhost:8900/auth/allforms")
+      .get("https://api-form-generator.herokuapp.com/auth/allforms")
       .then((response) => {
         setLoading(false);
         setData(response.data);

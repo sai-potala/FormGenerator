@@ -42,12 +42,13 @@ function FormLink(props) {
   const upload = () => {
     console.log("inside updolao", formData[0].data);
     axios
-      .post(`http://localhost:8900/auth/updateForm/${props.match.params.id}`, {
-        questions: formData[0].data,
-      })
-      .then(
-        alert("your form is updated sucessfully")
+      .post(
+        `https://api-form-generator.herokuapp.com/auth/updateForm/${props.match.params.id}`,
+        {
+          questions: formData[0].data,
+        }
       )
+      .then(alert("your form is updated sucessfully"))
       .catch((error) => console.log(error));
   };
 
@@ -143,7 +144,9 @@ function FormLink(props) {
   useEffect(() => {
     console.log("came to useeffect userform");
     axios
-      .get(`http://localhost:8900/auth/formLink/${props.match.params.id}`)
+      .get(
+        `https://api-form-generator.herokuapp.com/auth/formLink/${props.match.params.id}`
+      )
       .then((response) => {
         setLoading(false);
         setData(response.data);

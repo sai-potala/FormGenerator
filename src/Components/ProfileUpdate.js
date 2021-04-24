@@ -27,7 +27,9 @@ class ProfileUpdate extends React.Component {
 
   fethusers = () => {
     axios
-      .post("http://localhost:8900/auth/user", { token: Cookies.get("token") })
+      .post("https://api-form-generator.herokuapp.com/auth/user", {
+        token: Cookies.get("token"),
+      })
       .then((response) => {
         const user = response.data;
         this.setState({
@@ -66,7 +68,7 @@ class ProfileUpdate extends React.Component {
 
   formupload = () => {
     axios
-      .post("http://localhost:8900/auth/user/update", {
+      .post("https://api-form-generator.herokuapp.com/auth/user/update", {
         token: Cookies.get("token"),
         password: this.state.updated_password,
         name: this.state.updated_name,
@@ -77,9 +79,9 @@ class ProfileUpdate extends React.Component {
         console.log(data);
         this.setState({
           ...this.state,
-          updated_name:""
+          updated_name: "",
         });
-        alert("profile updated succesfully")
+        alert("profile updated succesfully");
       })
       .catch((error) => console.log(error));
   };
