@@ -28,7 +28,7 @@ class Profile extends React.Component {
   fethusers = () => {
     
     axios
-      .post("https://api-form-generator.herokuapp.com/user", {
+      .post("https://api-form-generator.herokuapp.com/auth/user", {
         token: Cookies.get("token"),
       })
       .then((response) => {
