@@ -5,7 +5,7 @@ import axios from "axios";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import "./Styles/AllForms.css";
-
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 function UserForm() {
   let transposedData=[];
@@ -16,17 +16,25 @@ function UserForm() {
     
 
     console.log("after render formDAta ",formData);
-    console.log("after render transposeddata",transposedData);
+    
     if (formData && formData.length > 0 ) {
-      for (let i = 0; i <= formData[0].data[0].answer.length; i++) {
-        let arr = [];
-        formData[0].data.map((item) => {
-          console.log("item in useeffect", item.answer[i]);
-          arr.push(item.answer[i]);
-        });
-        console.log("thi si arr", arr);
-        transposedData.push(arr);
-      }
+      formData.map((parentItem,key) =>{
+        let temp = [];
+        for (let i = 0; i < formData[key].data[key].answer.length; i++) {
+          let arr = [];
+          formData[key].data.map((item) => {
+            arr.push(item.answer[i]);
+          });
+          temp.push(arr)
+          console.log("thi is temp", temp);
+          
+        }
+        
+        transposedData.push(temp);
+        
+      })
+      console.log("final transposed data", transposedData);
+      
       return (
         <>
           <h1
@@ -47,7 +55,7 @@ function UserForm() {
                     {item.title}
                   </h1>
                   <div className="table-items">
-                    <table>
+                    <table id="table-to-xls">
                       <thead>
                         <tr>
                           {item.data.map((single) => {
@@ -56,12 +64,14 @@ function UserForm() {
                         </tr>
                       </thead>
                       <tbody>
-                        {transposedData.map((item) => {
+                        {transposedData[key].map((item) => {
                           return (
                             <tr>
                               {item.map((value) => {
                                 if (value) {
                                   return <td>{value}</td>;
+                                } else {
+                                  return <td>No Records</td>;
                                 }
                               })}
                             </tr>
@@ -69,7 +79,16 @@ function UserForm() {
                         })}
                       </tbody>
                     </table>
-                    <center style={{marginTop:"10px"}}>
+                    <center style={{ marginTop: "10px" }}>
+                      <ReactHTMLTableToExcel
+                        id="test-table-xls-button"
+                        table="table-to-xls"
+                        filename="tablexls"
+                        sheet="tablexls"
+                        buttonText="Download as XLS"
+                      />
+                    </center>
+                    {/* <center style={{marginTop:"10px"}}>
                       <Button
                         variant="contained"
                         color="primary"
@@ -79,7 +98,7 @@ function UserForm() {
                       >
                         Download As Excel
                       </Button>
-                    </center>
+                    </center> */}
                   </div>
                 </>
               );
@@ -93,22 +112,12 @@ function UserForm() {
   };
 
   useEffect(() => {
-    console.log("came to useeffect userform");
     axios
       .get("https://api-form-generator.herokuapp.com/auth/allforms")
       .then((response) => {
-        console.log(
-          "response.data[0].data[0].answer",
-          response.data[0].data[0].answer.length
-        );
         
-        console.log("beforesetdatatransposed",transposedData)
-        console.log("before setloading")
         setLoading(false);
-        console.log("before setdata")
         setData(response.data);
-        console.log("after set data this is response", response.data);
-        console.log("Transposed DAta", transposedData);
       })
       .catch((error) => console.log(error));
       console.log("hi i came here after axios asynch call in use effect")
