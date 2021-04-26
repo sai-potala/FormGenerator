@@ -190,7 +190,7 @@ function FormLink(props) {
         
       })
       .catch((error) => console.log(error));
-  }, [props.match.params.id]);
+  }, []);
 
   return <div className="container">
     {loading ? <LoadingBox /> : display(formData)}
