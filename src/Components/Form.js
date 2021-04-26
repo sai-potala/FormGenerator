@@ -32,7 +32,7 @@ class Form extends React.Component {
   upload = () => {
     console.log("this.state.questions",this.state.questions)
     axios
-      .post("http://localhost:8900/auth/create", {
+      .post("https://api-form-generator.herokuapp.com/auth/create", {
         questions: this.state.questions,
         name: this.state.name,
         token: Cookies.get("token"),
