@@ -77,17 +77,7 @@ function FormLink(props) {
       .catch((error) => console.log(error));
   };
 
-  const addAnswer = (e,i) =>{
-    console.log("this is target.value",e.target.value);
-    const value = e.target.value
-    const updatedanswer = {
-      ...formData[0].data[i],answer:value
-    };
-    const upload = [];
-    upload.push(updatedanswer);
-    console.log("this is upload",upload)
 
-  }
 
   const display = (formData) => {
     
