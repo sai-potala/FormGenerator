@@ -19,7 +19,7 @@ class Form extends React.Component {
   addquestion = () => {
     const data = {
       question: this.state.value,
-      answer: "",
+      answer: [""],
     };
 
     this.state.questions.push(data);
@@ -30,8 +30,9 @@ class Form extends React.Component {
   };
 
   upload = () => {
+    console.log("this.state.questions",this.state.questions)
     axios
-      .post("https://api-form-generator.herokuapp.com/auth/create", {
+      .post("http://localhost:8900/auth/create", {
         questions: this.state.questions,
         name: this.state.name,
         token: Cookies.get("token"),

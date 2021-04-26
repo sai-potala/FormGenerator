@@ -31,21 +31,22 @@ function UserForm() {
         `https://api-form-generator.herokuapp.com/auth/formdelete/${value}`
       )
       .then((response) => {
+         axios
+           .get(
+             `https://api-form-generator.herokuapp.com/auth/form/${Cookies.get(
+               "userinfo"
+             )}`
+           )
+           .then((response) => {
+             setLoading(false);
+             setData(response.data);
+             console.log("this is response", response.data);
+           })
+           .catch((error) => console.log(error));
         console.log("this is response", response.data);
       })
       .catch((error) => console.log(error));
-      axios
-        .get(
-          `https://api-form-generator.herokuapp.com/auth/form/${Cookies.get(
-            "userinfo"
-          )}`
-        )
-        .then((response) => {
-          setLoading(false);
-          setData(response.data);
-          console.log("this is response", response.data);
-        })
-        .catch((error) => console.log(error));
+     
   }
   const display = (formData) => {
     console.log("came to form data", formData);
@@ -63,13 +64,11 @@ function UserForm() {
                 console.log("this is tiem in userform", item);
                 return (
                   <Paper className="userform-h2">
-                    <div className="container">
-                      <h2
-                        style={{ textTransform: "uppercase" }}
-                        className="paper-container-item"
-                      >
+                    <div className="paper-container-item">
+                      <h2 style={{ textTransform: "uppercase" }}>
                         {item.title}
                       </h2>
+                      <p>CreatedBy : {item.author}</p>
                     </div>
 
                     <p className="paper-container-item">

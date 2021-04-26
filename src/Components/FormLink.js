@@ -13,6 +13,10 @@ import { green } from "@material-ui/core/colors";
 
 
 function FormLink(props) {
+  let items;
+  let newdata;
+  let dataa;
+  
 
   const useStyles = makeStyles((theme) => ({
     button: {
@@ -40,12 +44,22 @@ function FormLink(props) {
   const [uploadData,setuploadData] = useState(null)
 
   const upload = () => {
-    console.log("inside updolao", formData[0].data);
+    
+    formData[0].data.map((item,key) =>{
+       
+        item.answer.map((value) => {
+          if (value) {
+            newdata.data[key].answer.push(value);
+          }
+        });
+        
+    })
+    console.log("newdata after pushing",newdata.data)
     axios
       .post(
         `https://api-form-generator.herokuapp.com/auth/updateForm/${props.match.params.id}`,
         {
-          questions: formData[0].data,
+          questions: newdata.data,
         }
       )
       .then(alert("your form is updated sucessfully"))
@@ -67,12 +81,17 @@ function FormLink(props) {
   const display = (formData) => {
     
     console.log("this is form data",formData);
+    dataa = JSON.parse(JSON.stringify(formData));
+
     if (
       formData &&
       formData.length > 0 &&
       uploadData &&
       uploadData.length > 0
     ) {
+      dataa[0].data.map((item, key) => {
+        item.answer = []
+        });
       console.log("thi sis setup in after form", uploadData);
       return (
         <>
@@ -103,21 +122,38 @@ function FormLink(props) {
                           <TextField
                             id="standard-basic"
                             label="Enter Your Answer"
-                            value={formData[0].data[sno].answer}
+                            value={
+                              dataa[0].data[sno].answer[
+                                dataa[0].data[sno].answer.length
+                              ]
+                            }
                             onChange={(e) => {
-                              const dataa = { ...formData[0] };
-                              console.log("dataa", dataa);
-                              const items = dataa.data;
+                              console.log("this is data", dataa);
+                              console.log(
+                                "this is dataa[0].data[sno].answer",
+                                dataa[0].data[sno].answer
+                              );
 
+                              items = dataa[0].data;
+                              dataa[0].data[sno].answer.pop();
+                              dataa[0].data[sno].answer.push(e.target.value);
+                              console.log(
+                                "  dataa[0].data[sno].answer",
+                                dataa[0].data[sno].answer
+                              );
                               items[sno] = {
                                 question: formData[0].data[sno].question,
-                                answer: e.target.value,
+                                answer: dataa[0].data[sno].answer,
                               };
-                              console.log(items);
-
-                              const newdata = { ...dataa, data: items };
-                              setData([{ ...newdata }]);
-                              console.log("formdata", formData);
+                              console.log("this is final", items);
+                              console.log("this is data[0]", dataa[0]);
+                              newdata = { ...dataa[0], data: items };
+                              console.log("new data is ", newdata);
+                              console.log(
+                                "form data ites lisis",
+                                formData[0].data
+                              );
+                              // setData([{ ...newdata }]);
                             }}
                           />
                         </div>
@@ -134,7 +170,6 @@ function FormLink(props) {
                 </div>
               );
             })}
-            
           </div>
         </>
       );
@@ -152,6 +187,7 @@ function FormLink(props) {
         setData(response.data);
         setuploadData(response.data[0].data);
         console.log("this is response,", response);
+        
       })
       .catch((error) => console.log(error));
   }, [props.match.params.id]);
