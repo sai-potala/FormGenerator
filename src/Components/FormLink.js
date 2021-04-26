@@ -41,6 +41,7 @@ function FormLink(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [formData, setData] = useState(null);
+  const [dummy, setDummy] = useState("null");
   const [uploadData,setuploadData] = useState(null)
 
   const upload = () => {
@@ -55,6 +56,7 @@ function FormLink(props) {
         
     })
     console.log("newdata after pushing",newdata.data)
+    setLoading(true)
     axios
       .post(
         `https://api-form-generator.herokuapp.com/auth/updateForm/${props.match.params.id}`,
@@ -62,7 +64,16 @@ function FormLink(props) {
           questions: newdata.data,
         }
       )
-      .then(alert("your form is updated sucessfully"))
+      .then(
+        (response) =>{
+          dataa[0].data.map((item, key) => {
+            item.answer = [];
+          });
+          setLoading(false)
+          alert("Data Successfully Uploaded")    
+          
+        }
+              )
       .catch((error) => console.log(error));
   };
 
@@ -190,9 +201,10 @@ function FormLink(props) {
         
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [loading, props.match.params.id]);
 
   return <div className="container">
+    {console.log("Came to re-render")}
     {loading ? <LoadingBox /> : display(formData)}
     </div>;
 }

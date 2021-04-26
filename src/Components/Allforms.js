@@ -20,7 +20,7 @@ function UserForm() {
     if (formData && formData.length > 0 ) {
       formData.map((parentItem,key) =>{
         let temp = [];
-        for (let i = 0; i < formData[key].data[key].answer.length; i++) {
+        for (let i = 0; i < formData[key].data[0].answer.length; i++) {
           let arr = [];
           formData[key].data.map((item) => {
             arr.push(item.answer[i]);
