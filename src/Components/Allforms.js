@@ -50,7 +50,7 @@ function UserForm() {
               console.log(item.data[0]);
               console.log("item in render is ",item.data[0].answer.length)
               return (
-                <>
+                <div>
                   <h1 style={{ textTransform: "capitalize" }} class>
                     {item.title}
                   </h1>
@@ -100,14 +100,14 @@ function UserForm() {
                       </Button>
                     </center> */}
                   </div>
-                </>
+                </div>
               );
             })}
           </div>
         </>
       );
     } else {
-      return <h1>invalid data</h1>;
+      return <h1>No Forms to display</h1>;
     }
   };
 

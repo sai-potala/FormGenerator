@@ -7,12 +7,16 @@ table, th, td {
 
 .table-container{
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    flex: 0 0 cal(25% - 4rem);
+    flex-wrap: wrap;
  
 }
 
+.table-container > div{
+    margin: 20px;
+}
 .table-items{
     margin-bottom: 40px;
 }
